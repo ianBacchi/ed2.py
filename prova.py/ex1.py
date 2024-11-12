@@ -34,8 +34,8 @@ for char in conteudo:
 numero = int(numero)
     
         
-resultado = switch(letra, numero)
-print(resultado)
+resultado_original = switch(letra, numero)
+print(resultado_original)
 
 #insertionSort, selectionSort, bubbleSort, mergeSort, quickSort, e heapSort
         
@@ -52,7 +52,7 @@ def insertionshort(vetor, tamanho):
         vetor[J + 1] = auxiliar
     return vetor
         
-print("Inserionsort: ", insertionshort(resultado,len(resultado)))
+print("Inserionsort: ", insertionshort(resultado_original.copy(),len(resultado_original)))
 resultado = switch(letra, numero)
 
 
@@ -71,8 +71,8 @@ def selectionshort(V, tam):
             V[indice] = aux
     return V
 
-print(resultado)
-print("selectionsort: ", selectionshort(resultado, len(resultado)))
+
+print("selectionsort: ", selectionshort(resultado_original.copy(), len(resultado)))
 resultado = switch(letra, numero)
 
 
@@ -89,8 +89,7 @@ def bubbleshort(vetor):
                 trocou = True
     return vetor
 
-print(resultado)
-print("bubllesort: ", bubbleshort(resultado))
+print("bubllesort: ", bubbleshort(resultado_original.copy()))
 resultado = switch(letra, numero)
 
 def mergesort(arr):
@@ -129,21 +128,21 @@ def merge(esquerda, direita):
 
     return resultado
 
-print(resultado)
-print("mergesort: ", mergesort(resultado))
+
+print("mergesort: ", mergesort(resultado_original.copy()))
 resultado = switch(letra, numero)
 
-def quickshort(V, ini, fim):
-    if ini < fim:
-        pivo = Particiona(V, ini, fim)
-        quickshort(V, ini, pivo - 1)
-        quickshort(V, pivo + 1, fim)
 
-def Particiona(V, ini, fim):
+def quicksort(V, ini, fim):
+    if ini < fim:
+        pivo = partition(V, ini, fim)
+        quicksort(V, ini, pivo - 1)
+        quicksort(V, pivo + 1, fim)
+
+def partition(V, ini, fim):
     esq = ini + 1
     dir = fim
     pivo = V[ini]
-    
     while esq <= dir:
         while esq <= fim and V[esq] <= pivo:
             esq += 1
@@ -151,13 +150,12 @@ def Particiona(V, ini, fim):
             dir -= 1
         if esq < dir:
             V[esq], V[dir] = V[dir], V[esq]
-    
-    V[ini], V[dir] = V[dir], V[ini]  # coloca o pivô na posição correta
-    return dir 
+    V[ini], V[dir] = V[dir], V[ini]
+    return dir
 
-print(resultado)
-quickshort(resultado, 0 ,len(resultado - 1))
-resultado = switch(letra, numero)
+# Copy resultado for quicksort and apply sorting
+
+print("Quick Sort:", quicksort(resultado_original.copy(), 0, len(resultado_original.copy())))
 
 
 
